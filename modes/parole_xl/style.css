@@ -1,0 +1,378 @@
+:root {
+    --primary-color: #6aaa64;
+    --secondary-color: #c9b458;
+    --dark-bg: #0f0f1e;
+    --light-text: #ffffff;
+    --dark-text: #333333;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --btn-primary: #538d4e;
+    --font-heading: 'System-ui', sans-serif;
+    --font-body: 'System-ui', sans-serif;
+    --gradient-bg: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--gradient-bg);
+    color: var(--light-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(106, 170, 100, 0.5);
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+}
+
+/* Forms and Inputs */
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.checkbox-label,
+.radio-label {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.checkbox-label input {
+    display: none;
+}
+
+.checkbox-label.checked {
+    background: var(--primary-color);
+}
+
+.radio-label input {
+    accent-color: var(--primary-color);
+}
+
+
+button {
+    background: var(--btn-primary);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 20px;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(83, 141, 78, 0.5);
+}
+
+button.secondary {
+    background: #555;
+    margin-left: 10px;
+}
+
+/* Game Interface */
+#game-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#timer {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+#game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+}
+
+#grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.grid-row {
+    display: flex;
+    gap: 5px;
+}
+
+.box {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #3a3a3c;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.box.correct {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.box.present {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.box.absent {
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
+}
+
+/* Keyboard */
+#keyboard {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.key {
+    background: #818384;
+    color: white;
+    padding: 15px 0;
+    flex: 1;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+
+.key.big {
+    flex: 1.5;
+}
+
+/* Opponent Progress */
+#opponent-status {
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.player-card {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+.player-name {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.big-score {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+#score-board {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+.green-text {
+    color: #6aaa64;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+#modal-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-green,
+.btn-blue {
+    width: 100%;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+}
+
+.btn-green {
+    background: #6aaa64;
+    color: white;
+}
+
+.btn-green:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(106, 170, 100, 0.5);
+}
+
+.btn-blue {
+    background: #00b4d8;
+    color: white;
+}
+
+.btn-blue:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+}
